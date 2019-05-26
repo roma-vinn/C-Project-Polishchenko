@@ -53,6 +53,7 @@ typedef size_t UTYPE; /* Unsigned type for application */
 
 #define MAX(a, b)       (a)>(b)?(a):(b)
 #define MIN(a, b)       (a)<(b)?(a):(b)
+#define SIGN(x)         ((x > 0) ? 1 : ((x < 0) ? -1 : 0))
 
 #define  PD_EQL(a, b)   (fabs((a)-(b)) < EQ_EPS)
 
