@@ -131,5 +131,17 @@ int test_Geometry2D() {
         return 1;
     }
     
+    // test incircleCenter
+    Triangle2D test_t = createTriangle(createPoint(0, 0),
+                                       createPoint(0, 4),
+                                       createPoint(4, 0));
+    if (excircleCenter(test_t).x != 2 || excircleCenter(test_t).y != 2) {
+        return 1;
+    }
+    
+    // test excircleCenter
+    if (excircleCenter(t).x != 2 || excircleCenter(t).y != 1.5 ) {
+        return 1;
+    }
     return 0;
 }

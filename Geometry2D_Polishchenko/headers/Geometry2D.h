@@ -59,9 +59,11 @@ DTYPE perimeter(Triangle2D t);
 
 // incirle radius
 DTYPE incircleRadius(Triangle2D t);
+Point2D incircleCenter(Triangle2D t);
 
 // excircle radius
 DTYPE excircleRadius(Triangle2D t);
+Point2D excircleCenter(Triangle2D t);
 
 // mass center 
 Point2D massCenter(Triangle2D t);
@@ -115,4 +117,5 @@ Line2D bisectorC(Triangle2D t);
 Line2D altitudeA(Triangle2D t);
 Line2D altitudeB(Triangle2D t);
 Line2D altitudeC(Triangle2D t);
+
 #endif /* Geometry2D_h */

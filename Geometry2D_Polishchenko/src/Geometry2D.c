@@ -84,6 +84,10 @@ DTYPE incircleRadius(Triangle2D t) {
     return 2 * square(t) / perimeter(t);
 }
 
+Point2D incircleCenter(Triangle2D t) {
+    return intersectLL(bisectorA(t), bisectorB(t));
+}
+
 DTYPE excircleRadius(Triangle2D t) {
     // sides of triangle
     Segment2D ab = createSegment(t.a, t.b),
@@ -97,6 +101,21 @@ DTYPE excircleRadius(Triangle2D t) {
     c = ac.length;
     
     return (a * b * c) / (4 * sqrt(p * (p-a) * (p-b) * (p-c)));
+}
+
+Point2D excircleCenter(Triangle2D t) {
+    DTYPE x1 = t.a.x, y1 = t.a.y,
+    x2 = t.b.x, y2 = t.b.y,
+    x3 = t.c.x, y3 = t.c.y;
+    DTYPE x12 = x1 - x2, x23 = x2 - x3, x31 = x3 - x1,
+    y12 = y1 - y2, y23 = y2 - y3, y31 = y3 - y1;
+    DTYPE z1 = x1 * x1 + y1 * y1,
+    z2 = x2 * x2 + y2 * y2,
+    z3 = x3 * x3 + y3 * y3;
+    DTYPE zx = y12 * z3 + y23 * z1 + y31 * z2,
+    zy = x12 * z3 + x23 * z1 + x31 * z2,
+    z = x12 * y31 - y12 * x31;
+    return createPoint(-zx/(2*z), zy/(2*z));
 }
 
 Point2D massCenter(Triangle2D t) {
