@@ -307,3 +307,18 @@ Line2D bisectorC(Triangle2D t) {
     bisect_y = cb_y + ca_y;
     return createLine(t.c, createPoint(t.c.x + bisect_x, t.c.y + bisect_y));
 }
+
+Line2D altitudeA(Triangle2D t) {
+    Line2D op_side = createLine(t.b, t.c);
+    return createLine(t.a, createPoint(t.a.x + op_side.a, t.a.y + op_side.b));
+}
+
+Line2D altitudeB(Triangle2D t) {
+    Line2D op_side = createLine(t.a, t.c);
+    return createLine(t.b, createPoint(t.b.x + op_side.a, t.b.y + op_side.b));
+}
+
+Line2D altitudeC(Triangle2D t) {
+    Line2D op_side = createLine(t.b, t.a);
+    return createLine(t.c, createPoint(t.c.x + op_side.a, t.c.y + op_side.b));
+}

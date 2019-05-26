@@ -109,4 +109,10 @@ Line2D bisectorA(Triangle2D t);
 Line2D bisectorB(Triangle2D t);
 Line2D bisectorC(Triangle2D t);
 
+// functions to find altitudes of triangle from particular vertex
+/* algo: line perpendicular to Ax + By + c = 0 has directional vector (A, B)
+ */
+Line2D altitudeA(Triangle2D t);
+Line2D altitudeB(Triangle2D t);
+Line2D altitudeC(Triangle2D t);
 #endif /* Geometry2D_h */

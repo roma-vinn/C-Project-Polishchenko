@@ -125,5 +125,11 @@ int test_Geometry2D() {
         return 1;
     }
     
+    // test altitudeB [same as altitudeA and altitudeC]
+    Line2D altitude_b = altitudeB(t);
+    if (_pointSign(altitude_b, createPoint(11, 0)) != 0) {
+        return 1;
+    }
+    
     return 0;
 }
