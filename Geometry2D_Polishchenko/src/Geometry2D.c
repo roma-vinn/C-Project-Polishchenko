@@ -259,3 +259,51 @@ Line2D medianB(Triangle2D t) {
 Line2D medianC(Triangle2D t) {
     return createLine(t.c, createPoint((t.b.x + t.a.x)/2, (t.b.y + t.a.y)/2));
 }
+
+Line2D bisectorA(Triangle2D t) {
+    DTYPE ab_x = t.b.x - t.a.x,
+    ab_y = t.b.y - t.a.y,
+    ac_x = t.c.x - t.a.x,
+    ac_y = t.c.y - t.a.y;
+    DTYPE ab_len = sqrt(pow(ab_x, 2) + pow(ab_y, 2)),
+    ac_len = sqrt(pow(ac_x, 2) + pow(ac_y, 2));
+    ab_x /= ab_len;
+    ab_y /= ab_len;
+    ac_x /= ac_len;
+    ac_y /= ac_len;
+    DTYPE bisect_x = ab_x + ac_x,
+    bisect_y = ab_y + ac_y;
+    return createLine(t.a, createPoint(t.a.x + bisect_x, t.a.y + bisect_y));
+}
+
+Line2D bisectorB(Triangle2D t) {
+    DTYPE ba_x = t.a.x - t.b.x,
+    ba_y = t.a.y - t.b.y,
+    bc_x = t.c.x - t.b.x,
+    bc_y = t.c.y - t.b.y;
+    DTYPE ba_len = sqrt(pow(ba_x, 2) + pow(ba_y, 2)),
+    bc_len = sqrt(pow(bc_x, 2) + pow(bc_y, 2));
+    ba_x /= ba_len;
+    ba_y /= ba_len;
+    bc_x /= bc_len;
+    bc_y /= bc_len;
+    DTYPE bisect_x = ba_x + bc_x,
+    bisect_y = ba_y + bc_y;
+    return createLine(t.b, createPoint(t.b.x + bisect_x, t.b.y + bisect_y));
+}
+
+Line2D bisectorC(Triangle2D t) {
+    DTYPE cb_x = t.b.x - t.c.x,
+    cb_y = t.b.y - t.c.y,
+    ca_x = t.a.x - t.c.x,
+    ca_y = t.a.y - t.c.y;
+    DTYPE cb_len = sqrt(pow(cb_x, 2) + pow(cb_y, 2)),
+    ca_len = sqrt(pow(ca_x, 2) + pow(ca_y, 2));
+    cb_x /= cb_len;
+    cb_y /= cb_len;
+    ca_x /= ca_len;
+    ca_y /= ca_len;
+    DTYPE bisect_x = cb_x + ca_x,
+    bisect_y = cb_y + ca_y;
+    return createLine(t.c, createPoint(t.c.x + bisect_x, t.c.y + bisect_y));
+}

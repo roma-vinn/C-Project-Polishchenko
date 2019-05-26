@@ -102,6 +102,9 @@ Line2D medianB(Triangle2D t);
 Line2D medianC(Triangle2D t);
 
 // functions to find bisectors of triangle from particular vertex
+/* algo: calculate normed vectors of adjacent sides, calculate
+ their sum and build line that corresponds this vector
+ */
 Line2D bisectorA(Triangle2D t);
 Line2D bisectorB(Triangle2D t);
 Line2D bisectorC(Triangle2D t);

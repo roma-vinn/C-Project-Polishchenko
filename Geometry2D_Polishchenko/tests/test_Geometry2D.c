@@ -113,8 +113,15 @@ int test_Geometry2D() {
         return 1;
     }
     
+    // test medianA [same as medianB and medianC]
     Line2D ma = medianA(t);
     if (_pointSign(ma, createPoint(2, 3.0/2.0)) != 0) {
+        return 1;
+    }
+    
+    // test bisectorA [same as bisectorB and bisectorC]
+    Line2D ba = bisectorA(t);
+    if (_pointSign(ba, createPoint(1, 1)) != 0) {
         return 1;
     }
     
