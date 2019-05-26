@@ -57,8 +57,12 @@ DTYPE square(Triangle2D t);
 // perimeter of trianle [sum of lengths of sides]
 DTYPE perimeter(Triangle2D t);
 
-Point2D incircle(Triangle2D t);
-Point2D excircle(Triangle2D t);
+// incirle radius
+DTYPE incircleRadius(Triangle2D t);
+
+// excircle radius
+DTYPE excircleRadius(Triangle2D t);
+
 Point2D center(Triangle2D t);
 
 // ================= Line2D ================= //

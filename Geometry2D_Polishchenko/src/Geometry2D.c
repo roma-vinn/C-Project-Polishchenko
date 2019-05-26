@@ -78,6 +78,27 @@ DTYPE perimeter(Triangle2D t) {
     return ab.length + ac.length + bc.length;
 }
 
+DTYPE incircleRadius(Triangle2D t) {
+    // radius = S / p = 2 * S / P
+    // where S - square, P - perimeter, p - half of perimeter
+    return 2 * square(t) / perimeter(t);
+}
+
+DTYPE excircleRadius(Triangle2D t) {
+    // sides of triangle
+    Segment2D ab = createSegment(t.a, t.b),
+    ac = createSegment(t.a, t.c),
+    bc = createSegment(t.b, t.c);
+    
+    // half of perimeter
+    DTYPE p = perimeter(t) / 2,
+    a = ab.length,
+    b = bc.length,
+    c = ac.length;
+    
+    return (a * b * c) / (4 * sqrt(p * (p-a) * (p-b) * (p-c)));
+}
+
 // ================= Line2D ================= //
 
 
