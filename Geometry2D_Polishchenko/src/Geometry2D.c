@@ -248,3 +248,14 @@ Point2D intersectSS(Segment2D p1, Segment2D p2) {
     }
 }
 
+Line2D medianA(Triangle2D t) {
+    return createLine(t.a, createPoint((t.b.x + t.c.x)/2, (t.b.y + t.c.y)/2));
+}
+
+Line2D medianB(Triangle2D t) {
+    return createLine(t.b, createPoint((t.a.x + t.c.x)/2, (t.a.y + t.c.y)/2));
+}
+
+Line2D medianC(Triangle2D t) {
+    return createLine(t.c, createPoint((t.b.x + t.a.x)/2, (t.b.y + t.a.y)/2));
+}

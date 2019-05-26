@@ -96,4 +96,14 @@ Point2D intersectLL(Line2D p1, Line2D p2);
 Point2D intersectLS(Line2D p1, Segment2D p2);
 Point2D intersectSS(Segment2D p1, Segment2D p2);
 
+// functions to find median of triangle from particular vertex
+Line2D medianA(Triangle2D t);
+Line2D medianB(Triangle2D t);
+Line2D medianC(Triangle2D t);
+
+// functions to find bisectors of triangle from particular vertex
+Line2D bisectorA(Triangle2D t);
+Line2D bisectorB(Triangle2D t);
+Line2D bisectorC(Triangle2D t);
+
 #endif /* Geometry2D_h */

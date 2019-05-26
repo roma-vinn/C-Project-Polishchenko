@@ -113,5 +113,10 @@ int test_Geometry2D() {
         return 1;
     }
     
+    Line2D ma = medianA(t);
+    if (_pointSign(ma, createPoint(2, 3.0/2.0)) != 0) {
+        return 1;
+    }
+    
     return 0;
 }
