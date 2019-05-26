@@ -138,3 +138,32 @@ Line2D createLine(Point2D a, Point2D b) {
     return line;
 }
 
+ITYPE _pointSign(Line2D line, Point2D p) {
+    return SIGN(line.a * p.x + line.b * p.y + line.c);
+}
+
+// auxilary function for searching determinant
+DTYPE _det(DTYPE a11, DTYPE a12, DTYPE a21, DTYPE a22) {
+    return a11 * a22 - a12 * a21;
+}
+
+Point2D instersectLL(Line2D p1, Line2D p2) {
+    // { a1*x + b1*y = -c1,
+    // { a2*x + b2*y = -c2, - linear system
+    // if det == 0 --> either parallel or equivalent
+    if (PD_EQL(_det(p1.a, p1.b, p2.a, p2.b), 0)) {
+        // equivalent
+        if ( PD_EQL(_det(p1.a, p1.c, p2.a, p2.c), 0)
+            && PD_EQL(_det(p1.b, p1.c, p2.b, p2.c), 0) ) {
+            return createPoint(INF, INF);
+        } else {
+            // parallel
+            return createPoint(INF, -INF);
+        }
+    } else {
+        // intersection exists
+        DTYPE x = - _det(p1.c, p1.b, p2.c, p2.b) / _det(p1.a, p1.b, p2.a, p2.b);
+        DTYPE y = - _det(p1.a, p1.c, p2.a, p2.c) / _det(p1.a, p1.b, p2.a, p2.b);
+        return createPoint(x, y);
+    }
+}

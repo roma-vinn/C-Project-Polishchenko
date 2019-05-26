@@ -9,18 +9,10 @@
 #include "../headers/test_Geometry2D.h"
 
 int test_Geometry2D() {
-    DTYPE x0 = 0;
-    DTYPE y0 = 0;
-    
-    DTYPE x1 = 4;
-    DTYPE y1 = 0;
-    
-    DTYPE x2 = 0;
-    DTYPE y2 = 3;
-    
-    Point2D p0 = createPoint(x0, y0);
-    Point2D p1 = createPoint(x1, y1);
-    Point2D p2 = createPoint(x2, y2);
+    Point2D p0 = createPoint(0, 0);
+    Point2D p1 = createPoint(4, 0);
+    Point2D p2 = createPoint(0, 3);
+    Point2D p3 = createPoint(0, -3);
     
     Segment2D segm01 = createSegment(p0, p1);
     Segment2D segm02 = createSegment(p0, p2);
@@ -70,6 +62,23 @@ int test_Geometry2D() {
     
     // test if angles calculating correctly
     if (!PD_EQL(angleA(t), M_PI/2.0)) {
+        return 1;
+    }
+    
+    // test pointSign function
+    Line2D line = createLine(p0, p1);
+    if (_pointSign(line, p1) != 0 || _pointSign(line, p2) == _pointSign(line, p3)){
+        return 1;
+    }
+    
+    // test instersectLL
+    Line2D line1 = createLine(createPoint(0, 0), createPoint(1, 0));
+    Line2D line2 = createLine(createPoint(0, 1), createPoint(1, 1));
+    Line2D line3 = createLine(createPoint(0, 0), createPoint(0, 1));
+    if ( instersectLL(line1, line2).y != -INF  // parallel case
+        || instersectLL(line1, line1).y != INF  // e
+        || (instersectLL(line1, line3).y != 0
+            && instersectLL(line1, line3).x != 0)) {
         return 1;
     }
     

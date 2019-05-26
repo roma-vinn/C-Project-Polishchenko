@@ -84,8 +84,16 @@ typedef struct Line2D {
 // function to create a line within 2 given points
 Line2D createLine(Point2D a, Point2D b);
 
+// auxilary function to find sign of expression (a * p.x + b * p.y + c)
+// could be -1, 0 (if point on the line), 1
+ITYPE _pointSign(Line2D line, Point2D p);
+
+// functions to check wether two objects have intersection
+// return: point of intersection if it exists,
+//         Point2D(INF, INF) - if lines are equivalent,
+//         Point2D(INF, -INF) - if lines ara parallel.
+Point2D instersectLL(Line2D p1, Line2D p2);
 Point2D instersectSS(Segment2D p1, Segment2D p2);
 Point2D instersectLS(Line2D p1, Segment2D p2);
-Point2D instersectLL(Line2D p1, Line2D p2);
 
 #endif /* Geometry2D_h */
