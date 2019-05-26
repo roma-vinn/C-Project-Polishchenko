@@ -72,22 +72,46 @@ int test_Geometry2D() {
     }
     
     // test instersectLL
-    Line2D line1 = createLine(createPoint(0, 0), createPoint(1, 0));
-    Line2D line2 = createLine(createPoint(0, 1), createPoint(1, 1));
-    Line2D line3 = createLine(createPoint(0, 0), createPoint(0, 1));
-    if ( instersectLL(line1, line2).y != -INF  // parallel case
-        || instersectLL(line1, line1).y != INF  // equivalent
-        || (instersectLL(line1, line3).y != 0
-            && instersectLL(line1, line3).x != 0)) {
+    Line2D line1 = createLine(createPoint(0, 0), createPoint(1, 0)),
+    line2 = createLine(createPoint(0, 1), createPoint(1, 1)),
+    line3 = createLine(createPoint(0, 0), createPoint(0, 1)),
+    line4 = createLine(createPoint(1, 1), createPoint(5, 5)),
+    line5 = createLine(createPoint(1, 5), createPoint(5, 1));
+    if ( intersectLL(line1, line2).y != -INF  // parallel case
+        || intersectLL(line1, line1).y != INF  // equivalent
+        || (intersectLL(line1, line3).y != 0
+            && intersectLL(line1, line3).x != 0)
+        || (intersectLL(line4, line5).y != 3
+            && intersectLL(line4, line5).x != 3)) {
         return 1;
     }
     
     // test instersectLS
-    if ( instersectLS(line1, segm01).y != INF
-        || (instersectLS(line3, segm01).x != 0
-            && instersectLS(line3, segm01).y != 0)
-        || instersectLS(line2, segm01).y != -INF) {
+    if ( intersectLS(line1, segm01).y != INF
+        || (intersectLS(line3, segm01).x != 0
+            && intersectLS(line3, segm01).y != 0)
+        || intersectLS(line2, segm01).y != -INF) {
         return 1;
     }
+    
+    // test intersectSS [all variants]
+    Point2D
+    ip1 = intersectSS(createSegment(createPoint(1, 1), createPoint(5, 1)),
+                      createSegment(createPoint(1, 5), createPoint(5, 5))),
+    ip2 = intersectSS(createSegment(createPoint(1, 1), createPoint(5, 5)),
+                      createSegment(createPoint(1, 5), createPoint(5, 1))),
+    ip3 = intersectSS(createSegment(createPoint(1, 1), createPoint(3, 3)),
+                      createSegment(createPoint(3, 3), createPoint(5, 5))),
+    ip4 = intersectSS(createSegment(createPoint(1, 1), createPoint(5, 1)),
+                      createSegment(createPoint(3, 1), createPoint(5, 1))),
+    ip5 = intersectSS(createSegment(createPoint(1, 1), createPoint(5, 1)),
+                      createSegment(createPoint(3, 1), createPoint(7, 1)));
+    if (ip1.y != -INF || !(PD_EQL(ip2.x, 3) && PD_EQL(ip2.y, 3))
+        || !(PD_EQL(ip3.x, 3) && PD_EQL(ip3.y, 3))
+        || ip4.y != INF
+        || ip5.y != INF) {
+        return 1;
+    }
+    
     return 0;
 }

@@ -131,9 +131,9 @@ DTYPE angleC(Triangle2D t) {
 
 Line2D createLine(Point2D a, Point2D b) {
     Line2D line;
-    line.a = b.y - a.y;
-    line.b = a.x - b.x;
-    line.c = a.x * b.y - a.y * b.x;
+    line.a = a.y - b.y;
+    line.b = b.x - a.x;
+    line.c = - line.a * a.x - line.b * a.y;
     
     return line;
 }
@@ -147,7 +147,7 @@ DTYPE _det(DTYPE a11, DTYPE a12, DTYPE a21, DTYPE a22) {
     return a11 * a22 - a12 * a21;
 }
 
-Point2D instersectLL(Line2D p1, Line2D p2) {
+Point2D intersectLL(Line2D p1, Line2D p2) {
     // { a1*x + b1*y = -c1,
     // { a2*x + b2*y = -c2, - linear system
     // if det == 0 --> either parallel or equivalent
@@ -168,7 +168,7 @@ Point2D instersectLL(Line2D p1, Line2D p2) {
     }
 }
 
-Point2D instersectLS(Line2D p1, Segment2D p2) {
+Point2D intersectLS(Line2D p1, Segment2D p2) {
     // if both ends of segment are on the line - infinite number of dots
     if (_pointSign(p1, p2.a) == 0 && _pointSign(p1, p2.b) == 0) {
         return createPoint(INF, INF);
@@ -184,9 +184,67 @@ Point2D instersectLS(Line2D p1, Segment2D p2) {
     
     // if ends of segments are on different sides of the line
     if (_pointSign(p1, p2.a) != _pointSign(p1, p2.b)) {
-        return instersectLL(p1, createLine(p2.a, p2.b));
+        return intersectLL(p1, createLine(p2.a, p2.b));
     } else {
         return createPoint(INF, -INF);
+    }
+}
+
+// auxilary function to check if dot is on the segment
+ITYPE _onSegment(Point2D p1, Segment2D p2) {
+    if (PD_EQL(createSegment(p1, p2.a).length + createSegment(p1, p2.b).length,
+               p2.length)) {
+        return 1;
+    } else {
+        return 0;
+    }
+    
+}
+
+Point2D intersectSS(Segment2D p1, Segment2D p2) {
+    // point of intersection of two lines build on given segments
+    Point2D p = intersectLL(createLine(p1.a, p1.b), createLine(p2.a, p2.b));
+    
+    // if it's the only point
+    if (p.x != INF) {
+        // and if it belongs to both segments
+        if (_onSegment(p, p1) && _onSegment(p, p2)) {
+            return p;
+        } else {
+            // else - there isn't intersection
+            return createPoint(INF, -INF);
+        }
+    } else {
+        // if lines are parallel --> no common points
+        if (p.y == -INF) {
+            return createPoint(INF, -INF);
+        } else {  // else if lines are equivalent
+            // if all of the ends of any segment don't belong to the other one
+            // --> no common points
+            if (!_onSegment(p1.a, p2) && !_onSegment(p1.b, p2)
+                && !_onSegment(p2.a, p1) && !_onSegment(p2.b, p1)) {
+                return createPoint(INF, -INF);
+            } else {
+                Segment2D segm1 = createSegment(p1.a, p2.a),
+                segm2 = createSegment(p1.a, p2.b),
+                segm3 = createSegment(p1.b, p2.a),
+                segm4 = createSegment(p1.b, p2.b);
+                DTYPE max_len = MAX(MAX(segm1.length, segm2.length),
+                                    MAX(segm3.length, segm4.length));
+                // if sum of lengths == max len --> lay consistently on the line
+                // --> one common point
+                if (PD_EQL(p1.length + p2.length, max_len)) {
+                    if (PD_EQL(segm1.length, 0) || PD_EQL(segm2.length, 0)) {
+                        return p1.a;
+                    } else {
+                        return p1.b;
+                    }
+                } else {
+                    // have common part --> infinite number of common points
+                    return createPoint(INF, INF);
+                }
+            }
+        }
     }
 }
 

@@ -92,8 +92,8 @@ ITYPE _pointSign(Line2D line, Point2D p);
 // return: point of intersection if it exists,
 //         Point2D(INF, INF) - if lines are equivalent,
 //         Point2D(INF, -INF) - if lines ara parallel.
-Point2D instersectLL(Line2D p1, Line2D p2);
-Point2D instersectLS(Line2D p1, Segment2D p2);
-Point2D instersectSS(Segment2D p1, Segment2D p2);
+Point2D intersectLL(Line2D p1, Line2D p2);
+Point2D intersectLS(Line2D p1, Segment2D p2);
+Point2D intersectSS(Segment2D p1, Segment2D p2);
 
 #endif /* Geometry2D_h */
