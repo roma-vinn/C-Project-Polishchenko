@@ -167,3 +167,26 @@ Point2D instersectLL(Line2D p1, Line2D p2) {
         return createPoint(x, y);
     }
 }
+
+Point2D instersectLS(Line2D p1, Segment2D p2) {
+    // if both ends of segment are on the line - infinite number of dots
+    if (_pointSign(p1, p2.a) == 0 && _pointSign(p1, p2.b) == 0) {
+        return createPoint(INF, INF);
+    }
+    
+    // if one of the end of segment is on the line - return it
+    if (_pointSign(p1, p2.a) == 0) {
+        return p2.a;
+    }
+    if (_pointSign(p1, p2.b) == 0) {
+        return p2.b;
+    }
+    
+    // if ends of segments are on different sides of the line
+    if (_pointSign(p1, p2.a) != _pointSign(p1, p2.b)) {
+        return instersectLL(p1, createLine(p2.a, p2.b));
+    } else {
+        return createPoint(INF, -INF);
+    }
+}
+

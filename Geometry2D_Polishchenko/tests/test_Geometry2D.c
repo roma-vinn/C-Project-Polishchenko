@@ -76,11 +76,18 @@ int test_Geometry2D() {
     Line2D line2 = createLine(createPoint(0, 1), createPoint(1, 1));
     Line2D line3 = createLine(createPoint(0, 0), createPoint(0, 1));
     if ( instersectLL(line1, line2).y != -INF  // parallel case
-        || instersectLL(line1, line1).y != INF  // e
+        || instersectLL(line1, line1).y != INF  // equivalent
         || (instersectLL(line1, line3).y != 0
             && instersectLL(line1, line3).x != 0)) {
         return 1;
     }
     
+    // test instersectLS
+    if ( instersectLS(line1, segm01).y != INF
+        || (instersectLS(line3, segm01).x != 0
+            && instersectLS(line3, segm01).y != 0)
+        || instersectLS(line2, segm01).y != -INF) {
+        return 1;
+    }
     return 0;
 }

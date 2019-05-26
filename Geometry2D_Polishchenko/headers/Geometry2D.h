@@ -93,7 +93,7 @@ ITYPE _pointSign(Line2D line, Point2D p);
 //         Point2D(INF, INF) - if lines are equivalent,
 //         Point2D(INF, -INF) - if lines ara parallel.
 Point2D instersectLL(Line2D p1, Line2D p2);
-Point2D instersectSS(Segment2D p1, Segment2D p2);
 Point2D instersectLS(Line2D p1, Segment2D p2);
+Point2D instersectSS(Segment2D p1, Segment2D p2);
 
 #endif /* Geometry2D_h */
