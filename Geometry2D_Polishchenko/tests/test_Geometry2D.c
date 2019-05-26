@@ -24,18 +24,41 @@ int test_Geometry2D() {
     
     Segment2D segm01 = createSegment(p0, p1);
     Segment2D segm02 = createSegment(p0, p2);
-
+    
+    // test if the length calculating correctly
     if (!PD_EQL(segm01.length, 4) || !PD_EQL(segm02.length, 3)) {
+        return 1;
+    }
+    
+    // test if multS calculating correctly
+    if (!PD_EQL(multS(segm01, segm02), 0)) {
+        return 1;
+    }
+    
+    // test if mult calculating correctly
+    if (!PD_EQL(mult(segm01, segm02), 12)) {
         return 1;
     }
     
     Triangle2D t = createTriangle(p0, p1, p2);
    
+    // test if perimeter calculating correctly
     if (!PD_EQL(perimeter(t), 12)) {
         return 1;
     }
-
+    
+    // test if square calculating correctly
     if (!PD_EQL(square(t), 6)) {
+        return 1;
+    }
+    
+    // test if incirlce radius calculating correctly
+    if (!PD_EQL(incircleRadius(t), 1)) {
+        return 1;
+    }
+    
+    // test if excirlce radius calculating correctly
+    if (!PD_EQL(excircleRadius(t), 2.5)) {
         return 1;
     }
     
