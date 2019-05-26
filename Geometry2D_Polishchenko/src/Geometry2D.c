@@ -99,6 +99,10 @@ DTYPE excircleRadius(Triangle2D t) {
     return (a * b * c) / (4 * sqrt(p * (p-a) * (p-b) * (p-c)));
 }
 
+Point2D center(Triangle2D t) {
+    return createPoint((t.a.x + t.b.x + t.c.x)/3, (t.a.y + t.b.y + t.c.y)/3);
+}
+
 // ================= Line2D ================= //
 
 

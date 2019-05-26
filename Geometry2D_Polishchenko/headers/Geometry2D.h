@@ -63,6 +63,7 @@ DTYPE incircleRadius(Triangle2D t);
 // excircle radius
 DTYPE excircleRadius(Triangle2D t);
 
+// mass center 
 Point2D center(Triangle2D t);
 
 // ================= Line2D ================= //
