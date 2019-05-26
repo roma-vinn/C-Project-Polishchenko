@@ -67,7 +67,7 @@ DTYPE square(Triangle2D t) {
     Segment2D ab = createSegment(t.a, t.b),
     ac = createSegment(t.a, t.c);
     
-    return 0.5 * mult(ab, ac);
+    return fabs(0.5 * mult(ab, ac));
 }
 
 DTYPE perimeter(Triangle2D t) {
@@ -340,4 +340,78 @@ Line2D altitudeB(Triangle2D t) {
 Line2D altitudeC(Triangle2D t) {
     Line2D op_side = createLine(t.b, t.a);
     return createLine(t.c, createPoint(t.c.x + op_side.a, t.c.y + op_side.b));
+}
+
+ITYPE figuresSquares(Triangle2D triangle, Line2D line, DTYPE *s1, DTYPE *s2) {
+    Point2D ip1 = intersectLS(line, createSegment(triangle.a, triangle.b)),
+    ip2 = intersectLS(line, createSegment(triangle.b, triangle.c)),
+    ip3 = intersectLS(line, createSegment(triangle.c, triangle.a));
+    
+    // if line doesn't intersect our triangle at all
+    if ( ip1.x == INF && ip2.x == INF && ip3.x == INF) {
+        *s1 = -1;
+        *s2 = -1;
+        return 1;
+    }
+    
+    // if line intersect each side of triangle in one point
+    // --> devides it exactly on two new triangles
+    if ( ip1.x != INF && ip2.x != INF && ip3.x != INF) {
+        // one of this triangles definitely has non-0 square --> s1
+        Triangle2D t1 = createTriangle(triangle.a, ip1, ip2),
+        t2 = createTriangle(triangle.a, ip2, ip3),
+        t3 = createTriangle(triangle.b, ip1, ip2),
+        t4 = createTriangle(triangle.b, ip2, ip3);
+        
+        *s1 = MAX(MAX(square(t1), square(t2)), MAX(square(t3), square(t4)));
+        DTYPE s_tr = square(triangle);
+        *s2 = s_tr - *s1;
+        return 0;
+    }
+
+    // only one case left - when line intersects only 2 sides
+    
+    // if it's not ab --> line has common points with ac and bc
+    if (ip1.x == INF) {
+        *s1 = square(createTriangle(triangle.c, ip2, ip3));
+        *s2 = square(triangle) - *s1;
+        if (PD_EQL(MIN(*s1, *s2), 0)) {
+            *s1 = -1;
+            *s2 = -1;
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    
+    // if it's not bc --> line has common points with ac and ab
+    if (ip2.x == INF) {
+        *s1 = square(createTriangle(triangle.a, ip1, ip3));
+        *s2 = square(triangle) - *s1;
+        if (PD_EQL(MIN(*s1, *s2), 0)) {
+            *s1 = -1;
+            *s2 = -1;
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    
+    // if it's not ac --> line has common points with bc and ab
+    if (ip3.x == INF) {
+        *s1 = square(createTriangle(triangle.b, ip1, ip2));
+        *s2 = square(triangle) - *s1;
+        if (PD_EQL(MIN(*s1, *s2), 0)) {
+            *s1 = -1;
+            *s2 = -1;
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    
+    // smth went wrong
+    *s1 = -1;
+    *s2 = -1;
+    return 1;
 }

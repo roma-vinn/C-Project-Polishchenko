@@ -143,5 +143,18 @@ int test_Geometry2D() {
     if (excircleCenter(t).x != 2 || excircleCenter(t).y != 1.5 ) {
         return 1;
     }
+    
+    // test figuresSquares
+    DTYPE s1 = 0, s2 = 0;
+    if (figuresSquares(test_t, medianA(test_t), &s1, &s2) || !PD_EQL(s1, s2)) {
+        return 1;
+    }
+    if (!figuresSquares(test_t, altitudeB(test_t), &s1, &s2)) {
+        return 1;
+    }
+    if (figuresSquares(test_t, createLine(createPoint(2, 0),
+                                          createPoint(2, 2)), &s1, &s2)) {
+        return 1;
+    }
     return 0;
 }

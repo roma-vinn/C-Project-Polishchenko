@@ -118,4 +118,15 @@ Line2D altitudeA(Triangle2D t);
 Line2D altitudeB(Triangle2D t);
 Line2D altitudeC(Triangle2D t);
 
+// squares of figures we've got by deviding triangle with Line
+/*
+ @param triangle: Triangle
+ @param line: Line
+ @param s1: square of first figure
+ @param s2: square of second figure
+ return 0 if line intersect triangle,
+        1 - if it isn't
+ */
+ITYPE figuresSquares(Triangle2D triangle, Line2D line, DTYPE *s1, DTYPE *s2);
+
 #endif /* Geometry2D_h */
