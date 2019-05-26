@@ -62,5 +62,10 @@ int test_Geometry2D() {
         return 1;
     }
     
+    Point2D c = massCenter(t);
+    if (c.x != 4.0/3.0 || c.y != 1) {
+        return 1;
+    }
+    
     return 0;
 }
