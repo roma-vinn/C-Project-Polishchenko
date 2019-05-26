@@ -129,4 +129,12 @@ DTYPE angleC(Triangle2D t) {
 
 // ================= Line2D ================= //
 
+Line2D createLine(Point2D a, Point2D b) {
+    Line2D line;
+    line.a = b.y - a.y;
+    line.b = a.x - b.x;
+    line.c = a.x * b.y - a.y * b.x;
+    
+    return line;
+}
 

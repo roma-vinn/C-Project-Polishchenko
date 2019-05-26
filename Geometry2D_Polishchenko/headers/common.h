@@ -47,13 +47,14 @@ typedef int ITYPE;    /* Integer type for application */
 
 typedef size_t UTYPE; /* Unsigned type for application */
 
+#define INF INT_MAX
+
 #define EQ_EPS 0.0001 // epsilon : precision of arithmetics
 
 #define MAX(a, b)       (a)>(b)?(a):(b)
 #define MIN(a, b)       (a)<(b)?(a):(b)
 
 #define  PD_EQL(a, b)   (fabs((a)-(b)) < EQ_EPS)
-
 
 /* Basic types definitions */
 

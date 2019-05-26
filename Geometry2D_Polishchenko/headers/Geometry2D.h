@@ -19,7 +19,7 @@ typedef struct Point2D {
     DTYPE y;
 } Point2D;
 
-// function to create a point with given coordinates
+// function to create a point with 2 given coordinates
 Point2D createPoint(DTYPE x, DTYPE y);
 
 // ================= Segment2D ================= //
@@ -30,7 +30,7 @@ typedef struct Segment2D {
     DTYPE length;
 } Segment2D;
 
-// function to create a segment with given points
+// function to create a segment with 2 given points
 Segment2D createSegment(Point2D a, Point2D b);
 
 // Scalar multiplication of two vectors formed by two segments
@@ -48,7 +48,7 @@ typedef struct Triangle2D {
     
 } Triangle2D;
 
-// function to create a triangle with given points
+// function to create a triangle with 3 given points
 Triangle2D createTriangle(Point2D a, Point2D b, Point2D c);
 
 // square of triangle [vector multiplication formula]
@@ -80,6 +80,9 @@ typedef struct Line2D {
     DTYPE b;
     DTYPE c;
 } Line2D;
+
+// function to create a line within 2 given points
+Line2D createLine(Point2D a, Point2D b);
 
 Point2D instersectSS(Segment2D p1, Segment2D p2);
 Point2D instersectLS(Line2D p1, Segment2D p2);
