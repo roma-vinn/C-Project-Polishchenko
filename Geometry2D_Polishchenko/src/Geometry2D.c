@@ -103,6 +103,30 @@ Point2D massCenter(Triangle2D t) {
     return createPoint((t.a.x + t.b.x + t.c.x)/3, (t.a.y + t.b.y + t.c.y)/3);
 }
 
+DTYPE angleA(Triangle2D t) {
+    // sides of triangle
+    Segment2D ab = createSegment(t.a, t.b),
+    ac = createSegment(t.a, t.c);
+    
+    return acos( multS(ab, ac) / (ab.length * ac.length) );
+}
+
+DTYPE angleB(Triangle2D t) {
+    // sides of triangle
+    Segment2D ba = createSegment(t.b, t.a),
+    bc = createSegment(t.b, t.c);
+    
+    return acos( multS(ba, bc) / (ba.length * bc.length) );
+}
+
+DTYPE angleC(Triangle2D t) {
+    // sides of triangle
+    Segment2D ca = createSegment(t.c, t.a),
+    cb = createSegment(t.c, t.b);
+    
+    return acos( multS(ca, cb) / (ca.length * cb.length) );
+}
+
 // ================= Line2D ================= //
 
 

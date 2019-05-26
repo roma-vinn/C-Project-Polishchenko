@@ -66,6 +66,11 @@ DTYPE excircleRadius(Triangle2D t);
 // mass center 
 Point2D massCenter(Triangle2D t);
 
+// functions to calculate radian measure of angles within vertices
+DTYPE angleA(Triangle2D t);
+DTYPE angleB(Triangle2D t);
+DTYPE angleC(Triangle2D t);
+
 // ================= Line2D ================= //
 
 typedef struct Line2D {
