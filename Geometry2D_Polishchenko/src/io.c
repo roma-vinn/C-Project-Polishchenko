@@ -23,6 +23,7 @@ Point2D **readPoint(FILE *input, ITYPE *n) {
     ITYPE count = 0;
     fgets(num, sizeof(char) * 10 + 1, input);
     count = atoi(num);
+    if (count < 0) perror("Incorrect input data");
     *n = count;
     
     // array of points
@@ -58,6 +59,7 @@ Segment2D **readSegment(FILE *input, ITYPE *n) {
     ITYPE count = 0;
     fgets(num, sizeof(char) * 10 + 1, input);
     count = atoi(num);
+    if (count < 0) perror("Incorrect input data");
     *n = count;
     
     // array of points
@@ -97,6 +99,7 @@ Line2D **readLine(FILE *input, ITYPE *n) {
     ITYPE count = 0;
     fgets(num, sizeof(char) * 10 + 1, input);
     count = atoi(num);
+    if (count < 0) perror("Incorrect input data");
     *n = count;
     
     // array of points
@@ -136,6 +139,7 @@ Triangle2D **readTriangle(FILE *input, ITYPE *n) {
     ITYPE count = 0;
     fgets(num, sizeof(char) * 10 + 1, input);
     count = atoi(num);
+    if (count < 0) perror("Incorrect input data");
     *n = count;
     
     // array of points
@@ -172,3 +176,198 @@ Triangle2D **readTriangle(FILE *input, ITYPE *n) {
     return triangle;
 }
 
+void addTriangleInfo(Triangle2D *t) {
+    fprintf(stdout, "Vertices: a = (%lf, %lf), b = (%lf, %lf), c = (%lf, %lf)\n",
+                    t->a->x, t->a->y,
+                    t->b->x, t->b->y,
+                    t->c->x, t->c->y);
+    fprintf(stdout, "Square = %lf, Perimeter = %lf\n", square(t), perimeter(t));
+    Point2D *inCenter = incircleCenter(t);
+    fprintf(stdout, "Incircle center = (%lf, %lf), radius = %lf\n",
+            inCenter->x, inCenter->y, incircleRadius(t));
+    freePoint(inCenter);
+    Point2D *exCenter = excircleCenter(t);
+    fprintf(stdout, "Excircle center = (%lf, %lf), radius = %lf\n",
+            exCenter->x, exCenter->y, excircleRadius(t));
+    freePoint(exCenter);
+    fprintf(stdout, "Angle A = %lf, Angle B = %lf, Angle B = %lf\n",
+            angleA(t), angleB(t), angleC(t));
+    Point2D *mCenter = massCenter(t);
+    fprintf(stdout, "Mass center = (%lf, %lf)\n\n", mCenter->x, mCenter->y);
+    freePoint(mCenter);
+    
+    if (in_file) {
+        fprintf(output, "Vertices: a = (%lf, %lf), b = (%lf, %lf), c = (%lf, %lf)\n",
+                t->a->x, t->a->y,
+                t->b->x, t->b->y,
+                t->c->x, t->c->y);
+        fprintf(output, "Square = %lf, Perimeter = %lf\n", square(t), perimeter(t));
+        Point2D *inCenter = incircleCenter(t);
+        fprintf(output, "Incircle center = (%lf, %lf), radius = %lf\n",
+                inCenter->x, inCenter->y, incircleRadius(t));
+        freePoint(inCenter);
+        Point2D *exCenter = excircleCenter(t);
+        fprintf(output, "Excircle center = (%lf, %lf), radius = %lf\n",
+                exCenter->x, exCenter->y, excircleRadius(t));
+        freePoint(exCenter);
+        fprintf(output, "Angle A = %lf, Angle B = %lf, Angle B = %lf\n",
+                angleA(t), angleB(t), angleC(t));
+        Point2D *mCenter = massCenter(t);
+        fprintf(output, "Mass center = (%lf, %lf)\n\n", mCenter->x, mCenter->y);
+        freePoint(mCenter);
+    }
+}
+
+void addIntersectionSS(Segment2D *p1, Segment2D *p2) {
+    fprintf(stdout, "Segments with ends:\n"
+            "s1 - (%lf, %lf) and (%lf, %lf)\n"
+            "s2 - (%lf, %lf) and (%lf, %lf)\n",
+            p1->a->x, p1->a->y, p1->b->x, p1->b->y,
+            p2->a->x, p2->a->y, p2->b->x, p2->b->y);
+    
+    Point2D *inter = intersectSS(p1, p2);
+    if (inter->y == INF) {
+        fprintf(stdout, "Infinite number of common points.\n\n");
+    } else if (inter->y == -INF) {
+        fprintf(stdout, "No common points.\n\n");
+    } else {
+        fprintf(stdout, "Intersection = (%lf, %lf).\n\n",
+                inter->x, inter->y);
+    }
+    freePoint(inter);
+    
+    if (in_file) {
+        fprintf(output, "Segments with ends:\n"
+                "s1 - (%lf, %lf) and (%lf, %lf)\n"
+                "s2 - (%lf, %lf) and (%lf, %lf)\n",
+                p1->a->x, p1->a->y, p1->b->x, p1->b->y,
+                p2->a->x, p2->a->y, p2->b->x, p2->b->y);
+        
+        Point2D *inter = intersectSS(p1, p2);
+        if (inter->y == INF) {
+            fprintf(output, "Infinite number of common points.\n\n");
+        } else if (inter->y == -INF) {
+            fprintf(output, "No common points.\n\n");
+        } else {
+            fprintf(output, "Intersection = (%lf, %lf).\n\n",
+                    inter->x, inter->y);
+        }
+        freePoint(inter);
+    }
+}
+
+void addIntersectionLS(Line2D *p1, Segment2D *p2) {
+    fprintf(stdout, "Line: ax + by + c = 0,\n"
+            "where a = %lf, b = %lf, c = %lf\n",
+            p1->a, p1->b, p1->c);
+    fprintf(stdout, "Segment with ends (%lf, %lf) and (%lf, %lf)\n",
+            p2->a->x, p2->a->y, p2->b->x, p2->b->y);
+    
+    Point2D *inter = intersectLS(p1, p2);
+    if (inter->y == INF) {
+        fprintf(stdout, "Infinite number of common points.\n\n");
+    } else if (inter->y == -INF) {
+        fprintf(stdout, "No common points.\n\n");
+    } else {
+        fprintf(stdout, "Intersection = (%lf, %lf).\n\n",
+                inter->x, inter->y);
+    }
+    freePoint(inter);
+    
+    if (in_file) {
+        fprintf(output, "Line: ax + by + c = 0,\n"
+                "where a = %lf, b = %lf, c = %lf\n",
+                p1->a, p1->b, p1->c);
+        fprintf(output, "Segment with ends (%lf, %lf) and (%lf, %lf)\n",
+                p2->a->x, p2->a->y, p2->b->x, p2->b->y);
+        
+        Point2D *inter = intersectLS(p1, p2);
+        if (inter->y == INF) {
+            fprintf(output, "Infinite number of common points.\n\n");
+        } else if (inter->y == -INF) {
+            fprintf(output, "No common points.\n\n");
+        } else {
+            fprintf(output, "Intersection = (%lf, %lf).\n\n",
+                    inter->x, inter->y);
+        }
+        freePoint(inter);
+    }
+}
+
+void addIntersectionLL(Line2D *p1, Line2D *p2) {
+    fprintf(stdout, "Line 1: ax + by + c = 0,\n"
+            "where a = %lf, b = %lf, c = %lf\n",
+            p1->a, p1->b, p1->c);
+    fprintf(stdout, "Line 2: ax + by + c = 0,\n"
+            "where a = %lf, b = %lf, c = %lf\n",
+            p2->a, p2->b, p2->c);
+    
+    Point2D *inter = intersectLL(p1, p2);
+    if (inter->y == INF) {
+        fprintf(stdout, "Infinite number of common points.\n\n");
+    } else if (inter->y == -INF) {
+        fprintf(stdout, "No common points.\n\n");
+    } else {
+        fprintf(stdout, "Intersection = (%lf, %lf).\n\n",
+                inter->x, inter->y);
+    }
+    freePoint(inter);
+    
+    if (in_file) {
+        fprintf(output, "Line 1: ax + by + c = 0,\n"
+                "where a = %lf, b = %lf, c = %lf\n",
+                p1->a, p1->b, p1->c);
+        fprintf(output, "Line 2: ax + by + c = 0,\n"
+                "where a = %lf, b = %lf, c = %lf\n",
+                p2->a, p2->b, p2->c);
+        
+        Point2D *inter = intersectLL(p1, p2);
+        if (inter->y == INF) {
+            fprintf(output, "Infinite number of common points.\n\n");
+        } else if (inter->y == -INF) {
+            fprintf(output, "No common points.\n\n");
+        } else {
+            fprintf(output, "Intersection = (%lf, %lf).\n\n",
+                    inter->x, inter->y);
+        }
+        freePoint(inter);
+    }
+}
+
+void showSquares(Triangle2D *p1, Line2D *p2){
+    fprintf(stdout, "Triangle with vertices:\n"
+            "a = (%lf, %lf), b = (%lf, %lf), c = (%lf, %lf)\n",
+            p1->a->x, p1->a->y,
+            p1->b->x, p1->b->y,
+            p1->c->x, p1->c->y);
+    fprintf(stdout, "Line: ax + by + c = 0,\n"
+            "where a = %lf, b = %lf, c = %lf\n",
+            p2->a, p2->b, p2->c);
+    
+    DTYPE s1 = 0, s2 = 0;
+    if (figuresSquares(p1, p2, &s1, &s2)) {
+        fprintf(stdout, "Line doesn't intersect triangle.\n\n");
+    } else {
+        fprintf(stdout, "Line intersect triangle and cuts off two figures:\n"
+                "S1 = %lf, S2 = %lf\n\n", s1, s2);
+    }
+    
+    if (in_file) {
+        fprintf(output, "Triangle with vertices:\n"
+                "a = (%lf, %lf), b = (%lf, %lf), c = (%lf, %lf)\n",
+                p1->a->x, p1->a->y,
+                p1->b->x, p1->b->y,
+                p1->c->x, p1->c->y);
+        fprintf(output, "Line: ax + by + c = 0,\n"
+                "where a = %lf, b = %lf, c = %lf\n",
+                p2->a, p2->b, p2->c);
+        
+        DTYPE s1 = 0, s2 = 0;
+        if (figuresSquares(p1, p2, &s1, &s2)) {
+            fprintf(output, "Line doesn't intersect triangle.\n\n");
+        } else {
+            fprintf(output, "Line intersect triangle and cuts off two figures:\n"
+                    "S1 = %lf, S2 = %lf\n\n", s1, s2);
+        }
+    }
+}

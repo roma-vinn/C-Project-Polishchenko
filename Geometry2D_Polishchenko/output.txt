@@ -1,0 +1,24 @@
+Vertices: a = (0.000000, 0.000000), b = (1.000000, 0.000000), c = (0.000000, 1.000000)
+Square = 0.500000, Perimeter = 3.414214
+Incircle center = (0.292893, 0.292893), radius = 0.292893
+Excircle center = (0.500000, 0.500000), radius = 0.707107
+Angle A = 1.570796, Angle B = 0.785398, Angle B = 0.785398
+Mass center = (0.333333, 0.333333)
+
+Segments with ends:
+s1 - (0.000000, 0.000000) and (2.000000, 2.000000)
+s2 - (1.000000, 0.000000) and (0.000000, 1.000000)
+Intersection = (0.500000, 0.500000).
+
+Line 1: ax + by + c = 0,
+where a = -2.000000, b = 2.000000, c = 0.000000
+Line 2: ax + by + c = 0,
+where a = -1.000000, b = -1.000000, c = 1.000000
+Intersection = (0.500000, 0.500000).
+
+Triangle with vertices:
+a = (0.000000, 0.000000), b = (1.000000, 0.000000), c = (0.000000, 1.000000)
+Line: ax + by + c = 0,
+where a = 0.000000, b = 1.000000, c = -0.000000
+Line doesn't intersect triangle.
+
