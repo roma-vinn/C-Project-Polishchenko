@@ -40,6 +40,7 @@
 		30528026229C296D002BFCF5 /* segment_input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = segment_input.txt; sourceTree = "<group>"; };
 		30528027229C2C79002BFCF5 /* line_input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = line_input.txt; sourceTree = "<group>"; };
 		30528028229C2D66002BFCF5 /* triangle_input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = triangle_input.txt; sourceTree = "<group>"; };
+		30528029229C346C002BFCF5 /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +81,7 @@
 				30528026229C296D002BFCF5 /* segment_input.txt */,
 				30528027229C2C79002BFCF5 /* line_input.txt */,
 				30528028229C2D66002BFCF5 /* triangle_input.txt */,
+				30528029229C346C002BFCF5 /* README.txt */,
 			);
 			path = Geometry2D_Polishchenko;
 			sourceTree = "<group>";

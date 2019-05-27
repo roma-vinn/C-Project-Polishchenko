@@ -14,9 +14,9 @@
 #include "Geometry2D.h"
 
 // read 'count' structs from 'input'
-Point2D **readPoint(FILE *input, ITYPE count);
-Segment2D **readSegment(FILE *input, ITYPE count);
-Line2D **readLine(FILE *input, ITYPE count);
-Triangle2D **readTriangle(FILE *input, ITYPE count);
+Point2D **readPoint(FILE *input, ITYPE *n);
+Segment2D **readSegment(FILE *input, ITYPE *n);
+Line2D **readLine(FILE *input, ITYPE *n);
+Triangle2D **readTriangle(FILE *input, ITYPE *n);
 
 #endif /* io_h */
