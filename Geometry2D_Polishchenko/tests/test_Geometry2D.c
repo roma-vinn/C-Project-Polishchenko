@@ -43,6 +43,13 @@ int test_Geometry2D() {
     if (!PD_EQL(square(t), 6)) {
         return 1;
     }
+    // if 3 points on one line
+    Triangle2D *t_line = createTriangle(p0, p2, p3);
+    if (!PD_EQL(square(t_line), 0)) {
+        freeTriangle(t_line);
+        return 1;
+    }
+    freeTriangle(t_line);
 
     // test if incirlce radius calculating correctly
     if (!PD_EQL(incircleRadius(t), 1)) {

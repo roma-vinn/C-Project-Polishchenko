@@ -11,6 +11,7 @@
 		30528013229A856A002BFCF5 /* common.h in Sources */ = {isa = PBXBuildFile; fileRef = 30528012229A856A002BFCF5 /* common.h */; };
 		3052801C229A8B85002BFCF5 /* Geometry2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 3052801B229A8B85002BFCF5 /* Geometry2D.c */; };
 		30528021229AA0D8002BFCF5 /* test_Geometry2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 30528020229AA0D8002BFCF5 /* test_Geometry2D.c */; };
+		30528024229B9544002BFCF5 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 30528023229B9544002BFCF5 /* io.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,12 @@
 		3052801B229A8B85002BFCF5 /* Geometry2D.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Geometry2D.c; sourceTree = "<group>"; };
 		3052801F229AA0D8002BFCF5 /* test_Geometry2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_Geometry2D.h; sourceTree = "<group>"; };
 		30528020229AA0D8002BFCF5 /* test_Geometry2D.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_Geometry2D.c; sourceTree = "<group>"; };
+		30528022229B9544002BFCF5 /* io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
+		30528023229B9544002BFCF5 /* io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
+		30528025229C251A002BFCF5 /* points_input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = points_input.txt; sourceTree = "<group>"; };
+		30528026229C296D002BFCF5 /* segment_input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = segment_input.txt; sourceTree = "<group>"; };
+		30528027229C2C79002BFCF5 /* line_input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = line_input.txt; sourceTree = "<group>"; };
+		30528028229C2D66002BFCF5 /* triangle_input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = triangle_input.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +76,10 @@
 				30528018229A86B0002BFCF5 /* src */,
 				30528017229A86A6002BFCF5 /* headers */,
 				3052800B229A8510002BFCF5 /* main.c */,
+				30528025229C251A002BFCF5 /* points_input.txt */,
+				30528026229C296D002BFCF5 /* segment_input.txt */,
+				30528027229C2C79002BFCF5 /* line_input.txt */,
+				30528028229C2D66002BFCF5 /* triangle_input.txt */,
 			);
 			path = Geometry2D_Polishchenko;
 			sourceTree = "<group>";
@@ -79,6 +90,7 @@
 				30528012229A856A002BFCF5 /* common.h */,
 				3052801A229A8B85002BFCF5 /* Geometry2D.h */,
 				3052801F229AA0D8002BFCF5 /* test_Geometry2D.h */,
+				30528022229B9544002BFCF5 /* io.h */,
 			);
 			path = headers;
 			sourceTree = "<group>";
@@ -87,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				3052801B229A8B85002BFCF5 /* Geometry2D.c */,
+				30528023229B9544002BFCF5 /* io.c */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -155,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30528024229B9544002BFCF5 /* io.c in Sources */,
 				3052800C229A8510002BFCF5 /* main.c in Sources */,
 				3052801C229A8B85002BFCF5 /* Geometry2D.c in Sources */,
 				30528013229A856A002BFCF5 /* common.h in Sources */,
