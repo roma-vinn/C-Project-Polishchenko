@@ -1,4 +1,4 @@
-# Project_C_Polishchenko
+# C Project Polishchenko
 Виконав: Поліщенко Роман.
 
 Назва: Geometry2D.
